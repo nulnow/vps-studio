@@ -24,6 +24,7 @@ const htmlLang = lang === 'ru' ? 'ru' : 'en'
     <meta name="description" content={description} />
     <title>{title}</title>
     {canonicalUrl ? <link rel="canonical" href={canonicalUrl.toString()} /> : null}
+    <link rel="icon" type="image/svg+xml" href="/test3.svg" />
     <script is:inline define:vars={{ pageLang: lang }}>
       (() => {
         const KEY = 'vpsstudio.lang'
@@ -51,7 +52,7 @@ const htmlLang = lang === 'ru' ? 'ru' : 'en'
           savedRaw === 'en' ||
           savedRaw === 'minecraft' ||
           savedRaw === 'sims' ||
-          savedRaw === 'warhammer'
+          savedRaw === 'gotic'
             ? savedRaw
             : null
 
@@ -82,6 +83,9 @@ const htmlLang = lang === 'ru' ? 'ru' : 'en'
   </head>
   <body>
     <slot />
+    <div class="overlay-image" aria-hidden="true">
+      <img src="/overlay-image.jpg" alt="man is trying to see what is written on the tiny piece of paper" />
+    </div>
   </body>
 </html>
 

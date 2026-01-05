@@ -7,7 +7,7 @@ const { locale } = Astro.props as { locale: Locale }
 <div class="no-pro card">
   <div class="no-pro__head">
     <div>
-      <div class="no-pro__title">{t(locale, 'noPro.title')}</div>
+      <div class="no-pro__title" id="upgrade-to-pro">{t(locale, 'noPro.title')}</div>
       <div class="no-pro__badge">{t(locale, 'noPro.badge')}</div>
     </div>
   </div>

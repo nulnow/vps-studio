@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+  <defs>
+    <!-- Фиолетово-оранжевый неоновый градиент -->
+    <linearGradient id="neonVioletOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B00FF" />      <!-- Ярко-фиолетовый -->
+      <stop offset="50%" stop-color="#FF00FF" />     <!-- Неоновый фуксия -->
+      <stop offset="100%" stop-color="#FF5F00" />    <!-- Неоновый оранжевый -->
+    </linearGradient>
+    
+    <!-- Вариант 2: Более резкий переход -->
+    <linearGradient id="neonVioletOrange2" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#A855F7" />      <!-- Фиолетовый -->
+      <stop offset="33%" stop-color="#D946EF" />     <!-- Розово-фиолетовый -->
+      <stop offset="66%" stop-color="#FB923C" />     <!-- Оранжевый -->
+      <stop offset="100%" stop-color="#F97316" />    <!-- Ярко-оранжевый -->
+    </linearGradient>
+    
+    <!-- Вариант 3: С неоновым свечением -->
+    <radialGradient id="neonGlowVioletOrange" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8B00FF" />      <!-- Центр - фиолетовый -->
+      <stop offset="70%" stop-color="#FF00FF" />     <!-- Середина - фуксия -->
+      <stop offset="100%" stop-color="#FF5F00" />    <!-- Край - оранжевый -->
+    </radialGradient>
+    
+    <!-- Фильтр неонового свечения -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Круг с фиолетово-оранжевым неоновым градиентом -->
+  <circle cx="32" cy="32" r="28" fill="url(#neonVioletOrange)" filter="url(#neonGlow)" />
+</svg>

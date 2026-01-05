@@ -19,12 +19,14 @@ type Option = {
   key: OptionKey
   label: string
   kind: 'link'
-  href: string
+  href: string,
+  disabled?: boolean
 } | {
   key: OptionKey
   label: string
   kind: 'copy'
   command: string
+  disabled?: boolean
 }
 
 const releasesUrl = 'https://github.com/nulnow/vps-studio/releases/latest'
@@ -33,12 +35,12 @@ const repoUrl = 'https://github.com/nulnow/vps-studio'
 // NOTE: Real installer file URLs are not wired yet; these items point to GitHub Releases / repo.
 const options: Option[] = [
   { key: 'macos', label: t(locale, 'dl.option.macos'), kind: 'link', href: releasesUrl },
-  { key: 'ios', label: t(locale, 'dl.option.ios'), kind: 'link', href: releasesUrl },
-  { key: 'android', label: t(locale, 'dl.option.android'), kind: 'link', href: releasesUrl },
-  { key: 'windows', label: t(locale, 'dl.option.windows'), kind: 'link', href: releasesUrl },
-  { key: 'linux_appimage', label: t(locale, 'dl.option.linuxAppImage'), kind: 'link', href: releasesUrl },
-  { key: 'linux_deb', label: t(locale, 'dl.option.linuxDeb'), kind: 'link', href: releasesUrl },
-  { key: 'linux_rpm', label: t(locale, 'dl.option.linuxRpm'), kind: 'link', href: releasesUrl },
+  { key: 'ios', disabled: true, label: t(locale, 'dl.option.ios'), kind: 'link', href: releasesUrl },
+  { key: 'android', disabled: true, label: t(locale, 'dl.option.android'), kind: 'link', href: releasesUrl },
+  { key: 'windows', disabled: true, label: t(locale, 'dl.option.windows'), kind: 'link', href: releasesUrl },
+  { key: 'linux_appimage', disabled: true, label: t(locale, 'dl.option.linuxAppImage'), kind: 'link', href: releasesUrl },
+  { key: 'linux_deb', disabled: true, label: t(locale, 'dl.option.linuxDeb'), kind: 'link', href: releasesUrl },
+  { key: 'linux_rpm', disabled: true, label: t(locale, 'dl.option.linuxRpm'), kind: 'link', href: releasesUrl },
   { key: 'npx', label: t(locale, 'dl.option.npx'), kind: 'copy', command: 'npx vps-studio@latest' },
   { key: 'source', label: t(locale, 'dl.option.source'), kind: 'link', href: repoUrl }
 ]
@@ -62,11 +64,12 @@ const options: Option[] = [
       opt.kind === 'copy' ? (
         <button
           type="button"
-          class="menu__item"
+          class={opt.disabled ? "menu__item menu__item--disabled" : "menu__item"}
           role="menuitem"
           data-installer-item="copy"
           data-key={opt.key}
           data-command={opt.command}
+          disabled={opt.disabled}
         >
           <span class="menu__left">
             <span class="menu__icon"><DownloadIcon name={opt.key} /></span>
@@ -76,7 +79,7 @@ const options: Option[] = [
         </button>
       ) : (
         <a
-          class="menu__item"
+          class={opt.disabled ? "menu__item menu__item--disabled" : "menu__item"}
           role="menuitem"
           href={opt.href}
           target="_blank"

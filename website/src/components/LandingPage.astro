@@ -9,7 +9,8 @@ import { hrefFor, t, type Locale } from '../i18n'
 
 const { locale } = Astro.props as { locale: Locale }
 
-const sponsorUrl = 'https://hip.hosting/?code=0bac6e686d7f1f9f035b'
+const domainUrl = 'https://www.reg.ru/domain/new/?rlink=reflink-31107543'
+const sponsorUrl = 'https://reg.cloud/cloud/servers?rlink=reflink-31107543'
 const githubUrl = 'https://github.com/nulnow/vps-studio'
 const issuesUrl = 'https://github.com/nulnow/vps-studio/issues'
 const legalLocale = locale === 'ru' ? 'ru' : 'en'
@@ -51,25 +52,34 @@ const heroTitleRest = heroTitleParts.slice(1).join(' ')
 
         <div class="nav__right">
           <div class="nav__links">
-            <a class="nav__link nav__pricing-link" href={hrefFor(locale, '/#pricing')}>
+            <a class="nav__link nav__pricing-link" href={hrefFor(locale, '/#upgrade-to-pro')}>
               <span class="nav__pricing-title">{t(locale, 'nav.pricing')}</span>
               <span class="nav__pricing-note">{t(locale, 'nav.pricing.note')}</span>
             </a>
-            <a class="nav__link" href={hrefFor(locale, '/#sponsor')}>{t(locale, 'nav.sponsor')}</a>
+            <a class="nav__link" href={domainUrl} target="_blank" rel="noreferrer">{t(locale, 'nav.buyDomain')}</a>
+            <a class="nav__link" href={sponsorUrl} target="_blank" rel="noreferrer">{t(locale, 'nav.sponsor')}</a>
             <a class="nav__link gh-link" href={githubUrl} target="_blank" rel="noreferrer">
-              <GitHubIcon className="gh-icon" />
-              <span>{t(locale, 'nav.github')}</span>
+              <div class="gh-link__content">
+                <div class="gh-link__main">
+                  <GitHubIcon className="gh-icon" />
+                  <span>{t(locale, 'nav.github')}</span>
+                </div>
+                <span class="gh-link__hint">{t(locale, 'nav.github.hint')}</span>
+              </div>
             </a>
           </div>
 
           <details class="nav__mobile">
             <summary class="nav__mobile-btn">{t(locale, 'nav.mobile.menu')}</summary>
             <div class="nav__mobile-panel" role="menu">
-              <a class="nav__mobile-link" href={hrefFor(locale, '/#pricing')} role="menuitem">
+              <a class="nav__mobile-link" href={hrefFor(locale, '/#upgrade-to-pro')} role="menuitem">
                 <span class="nav__mobile-title">{t(locale, 'nav.pricing')}</span>
                 <span class="nav__mobile-note">{t(locale, 'nav.pricing.note')}</span>
               </a>
-              <a class="nav__mobile-link" href={hrefFor(locale, '/#sponsor')} role="menuitem">
+              <a class="nav__mobile-link" href={domainUrl} target="_blank" rel="noreferrer" role="menuitem">
+                {t(locale, 'nav.buyDomain')}
+              </a>
+              <a class="nav__mobile-link" href={sponsorUrl} target="_blank" rel="noreferrer" role="menuitem">
                 {t(locale, 'nav.sponsor')}
               </a>
               <a class="nav__mobile-link" href={githubUrl} target="_blank" rel="noreferrer" role="menuitem">
@@ -110,7 +120,7 @@ const heroTitleRest = heroTitleParts.slice(1).join(' ')
 
               <div class="hero__cta">
                 <DownloadInstallerButton locale={locale} />
-                <a class="btn" href={hrefFor(locale, '/#pricing')}>
+                <a class="btn" href={hrefFor(locale, '/#upgrade-to-pro')}>
                   {t(locale, 'nav.pricing')}
                 </a>
               </div>
@@ -125,8 +135,146 @@ const heroTitleRest = heroTitleParts.slice(1).join(' ')
       </section>
 
       <div class="container">
+      <section id="screenshots" class="section">
+        <div class="section__head">
+          <h2 class="section__title">{t(locale, 'screenshots.title')}</h2>
+          <p class="section__subtitle muted">{t(locale, 'screenshots.body')}</p>
+        </div>
+        <div class="screenshots">
+          <div class="screenshot">
+            <img src="/screenshot0.png" alt="Screenshot 1" loading="lazy" />
+          </div>
+          <div class="screenshot">
+            <img src="/screenshot1.png" alt="Screenshot 2" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section id="motivation" class="section">
+        <div class="section__head">
+          <h2 class="section__title">{t(locale, 'motivation.title')}</h2>
+        </div>
+        <div class="motivation">
+          <p class="motivation__intro">{t(locale, 'motivation.intro')}</p>
+          
+          <div class="motivation__block">
+            <p class="motivation__heading">{t(locale, 'motivation.goal')}</p>
+            <ul class="motivation__list">
+              <li>{t(locale, 'motivation.goal.item1')}</li>
+              <li>{t(locale, 'motivation.goal.item2')}</li>
+              <li>{t(locale, 'motivation.goal.item3')}</li>
+              <li>{t(locale, 'motivation.goal.item4')}</li>
+              <li>{t(locale, 'motivation.goal.item5')}</li>
+            </ul>
+          </div>
+
+          <div class="motivation__block">
+            <p class="motivation__heading">{t(locale, 'motivation.wizard')}</p>
+            <ul class="motivation__list">
+              <li>{t(locale, 'motivation.wizard.item1')}</li>
+              <li>{t(locale, 'motivation.wizard.item2')}</li>
+              <li>{t(locale, 'motivation.wizard.item3')}</li>
+              <li>{t(locale, 'motivation.wizard.item4')}</li>
+            </ul>
+          </div>
+
+          <p class="motivation__bonus">{t(locale, 'motivation.bonus')}</p>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="section__head">
+          <h2 class="section__title">{t(locale, 'features.title')}</h2>
+          <p class="section__subtitle muted">{t(locale, 'features.subtitle')}</p>
+        </div>
+        <div class="grid">
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+              <div class="feature__title">{t(locale, 'feature.gui.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.gui.body')}</p>
+          </div>
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <div class="feature__title">{t(locale, 'feature.lambda.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.lambda.body')}</p>
+          </div>
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+              <div class="feature__title">{t(locale, 'feature.database.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.database.body')}</p>
+          </div>
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              <div class="feature__title">{t(locale, 'feature.containers.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.containers.body')}</p>
+          </div>
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <div class="feature__title">{t(locale, 'feature.code.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.code.body')}</p>
+          </div>
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+              <div class="feature__title">{t(locale, 'feature.deploy.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.deploy.body')}</p>
+          </div>
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <div class="feature__title">{t(locale, 'feature.export.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.export.body')}</p>
+          </div>
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <div class="feature__title">{t(locale, 'feature.connections.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.connections.body')}</p>
+          </div>
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 2H8.6c-.4 0-.8.2-1.1.5-.3.3-.5.7-.5 1.1v12.8c0 .4.2.8.5 1.1.3.3.7.5 1.1.5h9.8c.4 0 .8-.2 1.1-.5.3-.3.5-.7.5-1.1V7.5L15.5 2z"/><path d="M14 2v6h6"/></svg>
+              <div class="feature__title">{t(locale, 'feature.wizard.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.wizard.body')}</p>
+          </div>
+          <div class="feature card">
+            <div class="feature__header">
+              <svg class="feature__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+              <div class="feature__title">{t(locale, 'feature.hosting.title')}</div>
+            </div>
+            <p class="muted">{t(locale, 'feature.hosting.body')}</p>
+          </div>
+        </div>
+      </section>
+
       <section id="pricing" class="section">
         <NoProPricing locale={locale} />
+      </section>
+
+      <section id="domain" class="section">
+        <div class="card sponsor">
+          <div>
+            <div style="font-weight: 900;">{t(locale, 'domain.title')}</div>
+            <p class="muted" style="margin: 8px 0 0;">{t(locale, 'domain.body')}</p>
+          </div>
+          <a class="btn primary" href={domainUrl} target="_blank" rel="noreferrer">
+            {t(locale, 'domain.cta')}
+          </a>
+        </div>
       </section>
 
       <section id="sponsor" class="section">

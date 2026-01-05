@@ -1,4 +1,4 @@
-export const locales = ['en', 'ru', 'minecraft', 'sims', 'warhammer'] as const
+export const locales = ['en', 'ru', 'minecraft', 'sims', 'gotic'] as const
 export type Locale = (typeof locales)[number]
 
 export const localeLabel: Record<Locale, string> = {
@@ -6,7 +6,7 @@ export const localeLabel: Record<Locale, string> = {
   ru: 'Русский',
   minecraft: 'Blocky language',
   sims: 'The Sims',
-  warhammer: 'Gothic Language'
+  gotic: 'Gothic Language'
 }
 
 type BaseDict = Record<string, string>
@@ -21,10 +21,12 @@ const en = {
   'nav.pricing.note': '(free forever)',
   'nav.how': 'How it works',
   'nav.stack': 'Stack',
+  'nav.buyDomain': 'Buy Domain',
   'nav.sponsor': 'Buy Hosting',
   'nav.download': 'Download',
   'nav.mobile.menu': 'Menu',
   'nav.github': 'GitHub',
+  'nav.github.hint': 'Star and watch',
 
   'hero.badge': 'COMMUNITY EDITION',
   'hero.badge.accent': '(FREE FOREVER)',
@@ -48,10 +50,6 @@ const en = {
   'dl.option.linuxRpm': 'Linux (RPM)',
   'dl.option.npx': 'Install via npx',
   'dl.option.source': 'Install from source',
-
-  'features.title': 'Built for daily VPS work',
-  'features.subtitle':
-    'Everything on the landing page is based on the current repo: Electron UI, embedded backend, URL connect, and SSH setup strategy for Ubuntu 24.',
 
   'pricing.title': 'Pricing',
   'pricing.subtitle': 'Simple: Community Edition is free forever. No paywalls.',
@@ -129,9 +127,50 @@ const en = {
   'download.note':
     'The Electron app starts the renderer (Vite) and a local backend (Hono). Remote connections and SSH setup are available from the UI.',
 
+  'motivation.title': 'Motivation',
+  'motivation.intro': 'I was tired of manually setting up infrastructure, databases, Kubernetes, and containers for the backend every time I started a project.',
+  'motivation.goal': 'The goal:',
+  'motivation.goal.item1': 'Download the app, connect it to local Docker or a remote server',
+  'motivation.goal.item2': 'Click through everything you need with your mouse',
+  'motivation.goal.item3': 'Write code in lambda functions, add sockets, quickly create a landing page',
+  'motivation.goal.item4': 'Test it on a test VPS and download it as a project',
+  'motivation.goal.item5': 'Export everything as code for Kubernetes, docker-compose, or package into a single VM',
+  'motivation.wizard': 'Through the wizard, you can:',
+  'motivation.wizard.item1': 'Click through what you need, write code, and launch it',
+  'motivation.wizard.item2': 'Open lambdas, change their code right there, add secrets',
+  'motivation.wizard.item3': 'Write test lambdas right there, click on them to execute',
+  'motivation.wizard.item4': 'Get one-commit feature branch deployment like in Vercel',
+  'motivation.bonus': 'You can even buy hosting in this app and configure it with your mouse, then save that template as code.',
+  'screenshots.title': 'Screenshots',
+  'screenshots.body': 'Select a server to connect to, then you can install databases, deploy your applications and images from the marketplace, and deploy serverless functions (SOON!).',
+  'features.title': 'Features',
+  'features.subtitle': 'Build and manage your infrastructure with a few clicks—no manual setup required.',
+  'feature.gui.title': 'Visual Infrastructure Management',
+  'feature.gui.body': 'Create and manage your entire infrastructure through a GUI. No need to manually configure Kubernetes, Docker Compose, or VMs every time you start a project.',
+  'feature.lambda.title': 'Serverless Functions',
+  'feature.lambda.body': 'Create lambda functions with a click, write code directly in the app, add secrets, and test them right away. One-commit feature branch deployment like Vercel.',
+  'feature.database.title': 'Database Management',
+  'feature.database.body': 'Install databases with a few clicks. Manage and configure them through the intuitive interface.',
+  'feature.containers.title': 'Application Containers',
+  'feature.containers.body': 'Add application containers, deploy images from the marketplace, and manage them all in one place.',
+  'feature.code.title': 'Built-in Code Editor',
+  'feature.code.body': 'Write and edit code for lambda functions directly in the app. No need to switch between tools.',
+  'feature.deploy.title': 'Deploy & Test',
+  'feature.deploy.body': 'Deploy your entire stack to a test VPS, test everything, and make changes on the fly.',
+  'feature.export.title': 'Export to Code',
+  'feature.export.body': 'Export your entire infrastructure as code: Kubernetes manifests, docker-compose files, or package it into a single VM.',
+  'feature.connections.title': 'Multiple Connection Types',
+  'feature.connections.body': 'Connect to local Docker or remote servers. Switch between environments seamlessly.',
+  'feature.wizard.title': 'Project Wizard',
+  'feature.wizard.body': 'Use the wizard to set up your entire project: infrastructure, databases, containers, sockets, and landing pages—all with a few clicks.',
+  'feature.hosting.title': 'Integrated Hosting',
+  'feature.hosting.body': 'Purchase hosting directly in the app, configure it with the GUI, and save the template as code for reuse.',
+  'domain.title': 'Buy Domain',
+  'domain.body': 'Need a domain name? Get a domain at REG.RU.',
+  'domain.cta': 'Open REG.RU',
   'sponsor.title': 'Buy Hosting',
-  'sponsor.body': 'Need a VPS fast? Order hosting at HIP HOSTING.',
-  'sponsor.cta': 'Open HIP HOSTING',
+  'sponsor.body': 'Need a VPS fast? Order hosting at REG.CLOUD.',
+  'sponsor.cta': 'Open REG.CLOUD',
 
   'lang.title': 'Language',
   'footer.rights': '© {year} VPS Studio. Built with Astro.',
@@ -170,10 +209,12 @@ const ru: Dict = {
   'nav.pricing.note': '(free forever)',
   'nav.how': 'Как работает',
   'nav.stack': 'Стек',
+  'nav.buyDomain': 'Купить домен',
   'nav.sponsor': 'Buy Hosting',
   'nav.download': 'Скачать',
   'nav.mobile.menu': 'Меню',
   'nav.github': 'GitHub',
+  'nav.github.hint': 'Star & watch',
 
   'hero.badge': 'COMMUNITY EDITION',
   'hero.badge.accent': '(FREE FOREVER)',
@@ -197,10 +238,6 @@ const ru: Dict = {
   'dl.option.linuxRpm': 'Linux (RPM)',
   'dl.option.npx': 'Установка через npx',
   'dl.option.source': 'Установка из исходников',
-
-  'features.title': 'Для ежедневной работы с VPS',
-  'features.subtitle':
-    'Всё на лендинге основано на текущем репозитории: Electron UI, встроенный backend, подключение по URL и SSH-стратегия для Ubuntu 24.',
 
   'pricing.title': 'Pricing',
   'pricing.subtitle': 'Просто: Community Edition — бесплатно навсегда. Без paywall.',
@@ -276,12 +313,53 @@ const ru: Dict = {
   'download.note':
     'Electron запускает renderer (Vite) и локальный backend (Hono). Подключения по URL и SSH-установка доступны из UI.',
 
+  'motivation.title': 'Мотивация',
+  'motivation.intro': 'Мне надоело каждый раз при старте проекта поднимать инфраструктуру, базу, Kubernetes, создавать контейнеры для бэкенда.',
+  'motivation.goal': 'Цель этого проекта:',
+  'motivation.goal.item1': 'Скачать программу, подключить её либо к локальному Docker, либо к удалённому серверу',
+  'motivation.goal.item2': 'Накликать мышкой КЛИК КЛИК всё, что нужно',
+  'motivation.goal.item3': 'Написать код в лямбда-функциях, добавить сокеты, лендинг тоже накликать быстро',
+  'motivation.goal.item4': 'Сразу протестировать на тестовом VPS и скачать как проект',
+  'motivation.goal.item5': 'Выгрузить всё в код для развертывания под Kubernetes, docker-compose или просто упаковать в одну VM',
+  'motivation.wizard': 'Через мастер можно:',
+  'motivation.wizard.item1': 'Накликать мышкой всё, что нужно, написать код, запустить',
+  'motivation.wizard.item2': 'Открывать лямбды, прямо тут же менять их код, добавлять секреты',
+  'motivation.wizard.item3': 'Прямо там же написать лямбды для теста, нажимать на них и чтобы они выполнялись',
+  'motivation.wizard.item4': 'Получить one-commit feature branch deployment как в Vercel',
+  'motivation.bonus': 'В этой программе можно даже купить хостинг и сразу же в ней его настроить мышкой и сохранить этот шаблон в код.',
+  'screenshots.title': 'Скриншоты',
+  'screenshots.body': 'Выбери сервер для подключения, затем на нём можно устанавливать базы данных, разворачивать свои приложения и образы из маркетплейса, а также деплоить serverless функции (СКОРО!).',
+  'features.title': 'Возможности',
+  'features.subtitle': 'Создавай и управляй инфраструктурой в пару кликов—без ручной настройки.',
+  'feature.gui.title': 'Визуальное управление инфраструктурой',
+  'feature.gui.body': 'Создавай и управляй всей инфраструктурой через графический интерфейс. Не нужно каждый раз вручную настраивать Kubernetes, Docker Compose или VM при старте проекта.',
+  'feature.lambda.title': 'Serverless функции',
+  'feature.lambda.body': 'Создавай лямбда-функции одним кликом, пиши код прямо в программе, добавляй секреты и тестируй сразу. One-commit feature branch deployment как в Vercel.',
+  'feature.database.title': 'Управление базами данных',
+  'feature.database.body': 'Устанавливай базы данных в пару кликов. Управляй и настраивай их через интуитивный интерфейс.',
+  'feature.containers.title': 'Контейнеры приложений',
+  'feature.containers.body': 'Добавляй контейнеры приложений, разворачивай образы из маркетплейса и управляй всем в одном месте.',
+  'feature.code.title': 'Встроенный редактор кода',
+  'feature.code.body': 'Пиши и редактируй код для лямбда-функций прямо в программе. Не нужно переключаться между инструментами.',
+  'feature.deploy.title': 'Развертывание и тестирование',
+  'feature.deploy.body': 'Разворачивай весь стек на тестовом VPS, тестируй всё и вноси изменения на лету.',
+  'feature.export.title': 'Экспорт в код',
+  'feature.export.body': 'Экспортируй всю инфраструктуру как код: манифесты Kubernetes, docker-compose файлы или упакуй в одну VM.',
+  'feature.connections.title': 'Разные типы подключений',
+  'feature.connections.body': 'Подключайся к локальному Docker или удалённым серверам. Переключайся между окружениями без проблем.',
+  'feature.wizard.title': 'Мастер проектов',
+  'feature.wizard.body': 'Используй мастер для настройки всего проекта: инфраструктура, базы данных, контейнеры, сокеты и лендинги—всё в пару кликов.',
+  'feature.hosting.title': 'Интегрированный хостинг',
+  'feature.hosting.body': 'Покупай хостинг прямо в программе, настраивай его через GUI и сохраняй шаблон в код для повторного использования.',
+  'domain.title': 'Купить домен',
+  'domain.body': 'Нужен домен? Закажи домен в REG.RU.',
+  'domain.cta': 'Открыть REG.RU',
   'sponsor.title': 'Buy Hosting',
-  'sponsor.body': 'Нужен VPS быстро? Закажи хостинг в HIP HOSTING.',
-  'sponsor.cta': 'Открыть HIP HOSTING',
+  'sponsor.body': 'Нужен VPS быстро? Закажи хостинг в REG.CLOUD.',
+  'sponsor.cta': 'Открыть REG.CLOUD',
 
   'lang.title': 'Язык',
-  'footer.rights': '© {year} VPS Studio. Сделано на Astro.',
+  'footer.rights': '© {year} VPS Studio. Сделано на Astro. (милитарум? 🧐)',
   'footer.license': 'Лицензия (MIT)',
   'footer.privacy': 'Политика конфиденциальности',
   'footer.terms': 'Условия использования',
@@ -299,7 +377,7 @@ const ru: Dict = {
     'Не используйте программу для критически важных проектов. Используете на свой риск.',
   'legal.repo': 'Репозиторий: github.com/nulnow/vps-studio'
   ,
-  'dev.banner': 'Сайт в разработке, контент для демонстрации, продукт в пре-альфа тестировании',
+  'dev.banner': 'Сайт в разработке, контент для демонстрации, продукт в РАЗРАБОТКЕ',
   'dev.banner.feedback': 'По поводу проблем и предложений писать сюда ->',
   'dev.banner.issues': 'https://github.com/nulnow/vps-studio/issues'
 }
@@ -393,9 +471,10 @@ const minecraft: Dict = {
   'nav.features': 'Blocks',
   'nav.pricing': 'Trading',
   'nav.pricing.note': '(free gems)',
+  'nav.buyDomain': 'Buy Domain',
   'nav.how': 'Circuit Guide',
   'nav.stack': 'Building Grid',
-  'nav.sponsor': 'bue hosting',
+  'nav.sponsor': 'Buy hosting',
   'nav.download': 'Download World',
   'nav.mobile.menu': 'Building Menu',
 
@@ -466,7 +545,7 @@ const sims: Dict = {
   'footer.rights': '© {year} VPS Studio. Built with Astro. (Sul sul.)'
 }
 
-const warhammer: Dict = {
+const gotic: Dict = {
   ...en,
   'meta.title': 'VPS Studio — Dark Sci-Fi Edition',
   'meta.description':
@@ -559,6 +638,7 @@ const warhammer: Dict = {
   'nav.features': 'Armaments',
   'nav.pricing': 'Tithe',
   'nav.pricing.note': '(Emperor Protects)',
+  'nav.buyDomain': 'Acquire Domain',
   'nav.how': 'Campaign Protocol',
   'nav.stack': 'Holy Tools',
   'nav.sponsor': 'Imperial Hosting',
@@ -619,8 +699,8 @@ export function t(locale: Locale, key: MessageKey, vars?: Record<string, string 
         ? minecraft
         : locale === 'sims'
           ? sims
-          : locale === 'warhammer'
-            ? warhammer
+          : locale === 'gotic'
+            ? gotic
             : en
   let s = dict[key] ?? en[key] ?? key
   if (vars) {
