@@ -239,8 +239,11 @@ const legalLocale: Locale = locale === 'ru' ? 'ru' : 'en'
 
             <h2 class="legal__h2">1. Сбор данных</h2>
             <p class="muted">
-              <strong>Автор не собирает и не запрашивает персональные данные пользователей</strong> (нет регистрации, нет
-              форм для email, нет встроенной аналитики).
+              <strong>Автор не собирает и не запрашивает персональные данные пользователей напрямую</strong> (нет регистрации, нет
+              форм для email).
+            </p>
+            <p class="muted">
+              Для сбора статистики посещений используется Яндекс.Метрика (подробнее см. раздел 3).
             </p>
 
             <p class="muted"><strong>Локальное хранение в браузере (для удобства):</strong></p>
@@ -263,13 +266,14 @@ const legalLocale: Locale = locale === 'ru' ? 'ru' : 'en'
             </p>
 
             <h2 class="legal__h2">3. Сторонние сервисы и внешние ссылки</h2>
-            <p class="muted">Автор не использует на сайте:</p>
-            <ul class="muted" style="margin: 0; padding-left: 18px;">
-              <li>Google Analytics</li>
-              <li>Facebook пиксели</li>
-              <li>Рекламные сети</li>
-              <li>Сервисы аналитики</li>
-            </ul>
+            <p class="muted"><strong>Аналитика:</strong></p>
+            <p class="muted">
+              На сайте используется Яндекс.Метрика для сбора статистики посещений. Сервис собирает информацию о посещениях сайта (IP-адрес, данные о браузере и устройстве, страницы, которые вы просматриваете, время на сайте). 
+              Подробная информация о том, как Яндекс обрабатывает данные, доступна в <a href="https://yandex.ru/legal/confidential/" target="_blank" rel="noreferrer">Политике конфиденциальности Яндекс</a>.
+            </p>
+            <p class="muted">
+              Вы можете отказаться от сбора данных Яндекс.Метрикой, отключив cookies в настройках браузера или используя расширения для блокировки аналитики.
+            </p>
             <p class="muted" style="margin-top: 12px;">
               На сайте есть внешние ссылки на GitHub (repo/issues/license) и HIP HOSTING (<a href={hipUrl} target="_blank" rel="noreferrer">{hipUrl}</a>).
               При переходе по ссылкам действуют их политики конфиденциальности и условия использования.
@@ -370,7 +374,10 @@ const legalLocale: Locale = locale === 'ru' ? 'ru' : 'en'
 
             <h2 class="legal__h2">1. Data collection</h2>
             <p class="muted">
-              The author does not collect or request personal user data (no signups, no email forms, no built-in analytics).
+              The author does not directly collect or request personal user data (no signups, no email forms).
+            </p>
+            <p class="muted">
+              Website statistics are collected using Yandex.Metrika (see section 3 for details).
             </p>
 
             <p class="muted"><strong>Local storage in your browser (for convenience):</strong></p>
@@ -386,7 +393,14 @@ const legalLocale: Locale = locale === 'ru' ? 'ru' : 'en'
             </p>
 
             <h2 class="legal__h2">3. Third-party services & external links</h2>
-            <p class="muted">This site does not use analytics services (Google Analytics, Facebook pixels, ad networks).</p>
+            <p class="muted"><strong>Analytics:</strong></p>
+            <p class="muted">
+              This site uses Yandex.Metrika to collect website statistics. The service collects information about site visits (IP address, browser and device data, pages you view, time on site). 
+              Detailed information about how Yandex processes data is available in the <a href="https://yandex.com/legal/confidential/" target="_blank" rel="noreferrer">Yandex Privacy Policy</a>.
+            </p>
+            <p class="muted">
+              You can opt out of Yandex.Metrika data collection by disabling cookies in your browser settings or using extensions to block analytics.
+            </p>
             <p class="muted" style="margin-top: 12px;">
               The site contains external links (GitHub and HIP HOSTING). When you follow them, their own policies apply.
             </p>
