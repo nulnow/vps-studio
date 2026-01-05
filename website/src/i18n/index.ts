@@ -34,6 +34,8 @@ const en = {
   'hero.title': 'VPS Studio',
   'hero.subtitle':
     'Manage dev containers and environments in a couple of clicks. Run development apps locally or on a remote server—with minimal manual console work. A Docker Desktop alternative for development with fast project bootstrapping (in the spirit of dev.new).',
+  'hero.tagline':
+    'Like Portainer meets local dev.new — manage containers with a GUI and bootstrap projects in seconds.',
   'hero.cta.primary': 'Get the app',
   'hero.cta.secondary': 'How it works',
 
@@ -222,6 +224,8 @@ const ru: Dict = {
   'hero.title': 'VPS Studio',
   'hero.subtitle':
     'Управление dev-контейнерами и окружениями в пару кликов. Запускай приложения для разработки локально или на удалённом сервере — с минимумом ручной работы в консоли. Альтернатива Docker Desktop для девелопмента с быстрым стартом проектов (в духе dev.new).',
+  'hero.tagline':
+    'Как микс Portainer и локального dev.new — управляй контейнерами через GUI и запускай проекты за секунды.',
   'hero.cta.primary': 'Установить',
   'hero.cta.secondary': 'Как работает',
 
