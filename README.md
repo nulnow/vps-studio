@@ -24,3 +24,9 @@ Manage dev containers and environments in a couple of clicks. Run development ap
 ## License
 
 MIT
+
+
+
+
+
+Да, вайбкод. И что? Плохая? А кто хороший

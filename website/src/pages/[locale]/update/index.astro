@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro'
-import { t, type Locale, hrefFor } from '../../../i18n'
+import { t, type Locale, hrefFor, locales } from '../../../i18n'
+
+export function getStaticPaths() {
+  return locales
+    .filter((l) => l !== 'en')
+    .map((locale) => ({ params: { locale } }))
+}
 
 const { locale } = Astro.params as { locale: Locale }
 const canonicalPath = hrefFor(locale, '/update/')
