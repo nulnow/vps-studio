@@ -1,0 +1,33 @@
+# Build outputs
+dist/
+dist-electron/
+
+# Development files
+node_modules/
+.DS_Store
+*.log
+
+# Source files (only CLI is needed)
+src/
+frontend/
+backend/
+interface/
+scripts/
+build/
+website/
+grape-logo-component/
+
+# Config files
+tsconfig.json
+vite.config.ts
+tailwind.config.cjs
+postcss.config.cjs
+
+# Media files
+*.zip
+*.jpg
+*.png
+*.gif
+screenshot*.png
+pirata.gif
+

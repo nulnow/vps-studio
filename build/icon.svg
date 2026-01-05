@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+  <defs>
+    <radialGradient id="brandDotGradient" cx="30%" cy="30%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#34d399" />
+    </radialGradient>
+    <filter id="brandDotGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <circle cx="9" cy="9" r="5" fill="url(#brandDotGradient)" filter="url(#brandDotGlow)" />
+  <circle cx="9" cy="9" r="7.5" fill="none" stroke="rgba(52, 211, 153, 0.12)" stroke-width="2" />
+</svg>
+

@@ -6,19 +6,19 @@ const root = process.cwd()
 const outdir = path.join(root, 'dist-electron')
 
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
-const dependencyNames = Object.keys(pkg.dependencies ?? {})
 
 /** @type {import('esbuild').BuildOptions} */
 const shared = {
   bundle: true,
   platform: 'node',
   format: 'cjs',
-  sourcemap: true,
+  sourcemap: false, // Отключаем sourcemap для production
   target: 'node20',
   outdir,
-  // Native deps (e.g. ssh2 -> *.node) must NOT be bundled by esbuild.
-  // We keep them as runtime requires from node_modules.
-  external: ['electron', ...dependencyNames]
+  minify: true, // Минификация для уменьшения размера
+  // Бандлим все зависимости, кроме нативных модулей и electron
+  // Нативные модули (ssh2) должны оставаться в node_modules
+  external: ['electron', 'ssh2']
 }
 
 await build({

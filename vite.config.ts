@@ -19,7 +19,13 @@ export default defineConfig({
   build: {
     outDir: '../dist/renderer',
     emptyOutDir: true,
-    sourcemap: true
+    sourcemap: false, // Отключаем sourcemap для production
+    minify: 'esbuild', // Минификация для уменьшения размера
+    rollupOptions: {
+      output: {
+        manualChunks: undefined // Отключаем code splitting для Electron
+      }
+    }
   }
 })
 
