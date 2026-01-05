@@ -21,6 +21,20 @@ Manage dev containers and environments in a couple of clicks. Run development ap
 
 ![Screenshot 2](./screenshot1.png)
 
+## Installation (macOS)
+
+After downloading the DMG from GitHub releases:
+
+1. Open the DMG file
+2. Drag the app to Applications folder
+3. If macOS blocks the app (because it's downloaded from the internet), run this command in Terminal:
+   ```bash
+   xattr -d com.apple.quarantine /Applications/VPS\ Studio.app
+   ```
+   Or right-click the app and select "Open" (you may need to do this twice).
+
+**Note**: The app is not code-signed with an Apple Developer ID. To avoid this step in the future, the app needs to be signed with an Apple Developer ID certificate ($99/year).
+
 ## License
 
 MIT
