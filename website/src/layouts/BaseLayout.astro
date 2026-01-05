@@ -1,5 +1,6 @@
 ---
 import type { Locale } from '../i18n'
+import '../styles/global.css'
 
 const {
   lang,
@@ -92,13 +93,9 @@ const htmlLang = lang === 'ru' ? 'ru' : 'en'
         // NOTE: dev banner is now always visible (no hostname gating).
       })()
     </script>
-    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
     <slot />
-    <div class="overlay-image" aria-hidden="true">
-      <img src="/overlay-image.jpg" alt="man is trying to see what is written on the tiny piece of paper" />
-    </div>
   </body>
 </html>
 
