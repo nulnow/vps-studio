@@ -1,6 +1,8 @@
 # VPS Studio
 
-Desktop app to manage VPS backends, automate setup via SSH, and keep everything observable.
+## Website
+
+**[https://vps-studio.com](https://vps-studio.com)**
 
 Manage dev containers and environments in a couple of clicks. Run development apps locally or on a remote server—with minimal manual console work. A Docker Desktop alternative for development with fast project bootstrapping (in the spirit of dev.new).
 
@@ -18,10 +20,6 @@ Manage dev containers and environments in a couple of clicks. Run development ap
 ![Screenshot 1](./screenshot0.png)
 
 ![Screenshot 2](./screenshot1.png)
-
-## Website
-
-**[https://vps-studio.com](https://vps-studio.com)**
 
 ## License
 
