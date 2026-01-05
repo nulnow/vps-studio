@@ -1,0 +1,322 @@
+---
+import { t, type Locale } from '../i18n'
+import DownloadIcon from './DownloadIcon.astro'
+
+const { locale } = Astro.props as { locale: Locale }
+
+type OptionKey =
+  | 'macos'
+  | 'ios'
+  | 'android'
+  | 'windows'
+  | 'linux_appimage'
+  | 'linux_deb'
+  | 'linux_rpm'
+  | 'npx'
+  | 'source'
+
+type Option = {
+  key: OptionKey
+  label: string
+  kind: 'link'
+  href: string
+} | {
+  key: OptionKey
+  label: string
+  kind: 'copy'
+  command: string
+}
+
+const releasesUrl = 'https://github.com/nulnow/vps-studio/releases/latest'
+const repoUrl = 'https://github.com/nulnow/vps-studio'
+
+// NOTE: Real installer file URLs are not wired yet; these items point to GitHub Releases / repo.
+const options: Option[] = [
+  { key: 'macos', label: t(locale, 'dl.option.macos'), kind: 'link', href: releasesUrl },
+  { key: 'ios', label: t(locale, 'dl.option.ios'), kind: 'link', href: releasesUrl },
+  { key: 'android', label: t(locale, 'dl.option.android'), kind: 'link', href: releasesUrl },
+  { key: 'windows', label: t(locale, 'dl.option.windows'), kind: 'link', href: releasesUrl },
+  { key: 'linux_appimage', label: t(locale, 'dl.option.linuxAppImage'), kind: 'link', href: releasesUrl },
+  { key: 'linux_deb', label: t(locale, 'dl.option.linuxDeb'), kind: 'link', href: releasesUrl },
+  { key: 'linux_rpm', label: t(locale, 'dl.option.linuxRpm'), kind: 'link', href: releasesUrl },
+  { key: 'npx', label: t(locale, 'dl.option.npx'), kind: 'copy', command: 'npx vps-studio@latest' },
+  { key: 'source', label: t(locale, 'dl.option.source'), kind: 'link', href: repoUrl }
+]
+---
+
+<div class="split" data-installer>
+  <button
+    class="btn primary dlbtn"
+    type="button"
+    aria-haspopup="menu"
+    aria-expanded="false"
+    data-installer-main
+  >
+    <span class="dlbtn__label" data-installer-main-label>{t(locale, 'dl.button')}</span>
+    <span class="dlbtn__caret" aria-hidden="true" data-installer-toggle>▾</span>
+    <span class="sr-only">{t(locale, 'dl.more')}</span>
+  </button>
+
+  <div class="menu" role="menu" aria-label={t(locale, 'dl.menu')} data-installer-menu hidden>
+    {options.map((opt) => (
+      opt.kind === 'copy' ? (
+        <button
+          type="button"
+          class="menu__item"
+          role="menuitem"
+          data-installer-item="copy"
+          data-key={opt.key}
+          data-command={opt.command}
+        >
+          <span class="menu__left">
+            <span class="menu__icon"><DownloadIcon name={opt.key} /></span>
+            <span class="menu__label">{opt.label}</span>
+          </span>
+          <span class="menu__meta"><DownloadIcon name="copy" /></span>
+        </button>
+      ) : (
+        <a
+          class="menu__item"
+          role="menuitem"
+          href={opt.href}
+          target="_blank"
+          rel="noreferrer"
+          data-installer-item={opt.kind}
+          data-key={opt.key}
+        >
+          <span class="menu__left">
+            <span class="menu__icon"><DownloadIcon name={opt.key} /></span>
+            <span class="menu__label">{opt.label}</span>
+          </span>
+        </a>
+      )
+    ))}
+    <div class="menu__toast" role="status" aria-live="polite" data-installer-toast hidden>
+      {t(locale, 'dl.copied')}
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ defaultLabel: t(locale, 'dl.button'), copiedText: t(locale, 'dl.copied') }}>
+  (() => {
+    const root = document.querySelector('[data-installer]')
+    if (!root) return
+    const main = root.querySelector('[data-installer-main]')
+    const mainLabel = root.querySelector('[data-installer-main-label]')
+    const toggle = root.querySelector('[data-installer-toggle]')
+    const menu = root.querySelector('[data-installer-menu]')
+    const toast = root.querySelector('[data-installer-toast]')
+    if (!(main && mainLabel && toggle && menu)) return
+
+    const STORAGE_KEY = 'vpsstudio.installerChoice.v1'
+
+    // Portal the menu to <body> so it can render above any stacking context (e.g. cards with backdrop-filter).
+    const placeholder = document.createComment('installer-menu-placeholder')
+    let isPortaled = false
+
+    const placeMenuBack = () => {
+      if (!isPortaled) return
+      placeholder.replaceWith(menu)
+      isPortaled = false
+      menu.style.position = ''
+      menu.style.left = ''
+      menu.style.top = ''
+      menu.style.right = ''
+      menu.style.bottom = ''
+      menu.style.zIndex = ''
+      menu.style.minWidth = ''
+    }
+
+    const portalMenuToBody = () => {
+      if (isPortaled) return
+      // Insert placeholder where the menu was.
+      menu.parentNode?.insertBefore(placeholder, menu)
+      document.body.appendChild(menu)
+      isPortaled = true
+    }
+
+    const positionMenu = () => {
+      if (!isPortaled) return
+      const rect = main.getBoundingClientRect()
+      // Make sure menu is measurable.
+      const menuRect = menu.getBoundingClientRect()
+      const menuW = menuRect.width || 280
+      const gap = 10
+      const margin = 12
+      let left = rect.left
+      let top = rect.bottom + gap
+
+      // Clamp horizontally.
+      if (left + menuW > window.innerWidth - margin) {
+        left = Math.max(margin, window.innerWidth - margin - menuW)
+      }
+      if (left < margin) left = margin
+
+      // If it would go off-screen bottom, open upwards.
+      const menuH = menuRect.height || 0
+      if (menuH && top + menuH > window.innerHeight - margin) {
+        const upTop = rect.top - gap - menuH
+        if (upTop > margin) top = upTop
+      }
+
+      menu.style.position = 'fixed'
+      menu.style.left = `${Math.round(left)}px`
+      menu.style.top = `${Math.round(top)}px`
+      menu.style.zIndex = '2147483647'
+      menu.style.minWidth = `${Math.max(280, Math.round(rect.width))}px`
+    }
+
+    const closeMenu = () => {
+      menu.hidden = true
+      main.setAttribute('aria-expanded', 'false')
+      placeMenuBack()
+    }
+    const openMenu = () => {
+      menu.hidden = false
+      main.setAttribute('aria-expanded', 'true')
+      portalMenuToBody()
+      // Next frame: position after layout.
+      requestAnimationFrame(() => positionMenu())
+    }
+
+    const getSaved = () => {
+      const v = localStorage.getItem(STORAGE_KEY)
+      return v ? v : null
+    }
+
+    const detectOsDefault = () => {
+      // prefer UA-CH
+      const uaData = navigator.userAgentData
+      const platform = (uaData && uaData.platform ? uaData.platform : navigator.platform || '').toLowerCase()
+      const ua = (navigator.userAgent || '').toLowerCase()
+      const p = (platform || ua)
+      if (p.includes('iphone') || p.includes('ipad') || p.includes('ipod') || p.includes('ios')) return 'ios'
+      if (p.includes('android')) return 'android'
+      if (p.includes('mac')) return 'macos'
+      if (p.includes('win')) return 'windows'
+      if (p.includes('linux')) return 'linux_appimage'
+      return 'source'
+    }
+
+    const setPrimary = (key) => {
+      const el = menu.querySelector(`[data-key="${CSS.escape(String(key))}"]`)
+      root.dataset.primaryKey = String(key || '')
+      if (!el) {
+        mainLabel.textContent = defaultLabel
+        root.dataset.primaryKind = 'link'
+        root.dataset.primaryHref = releasesUrl
+        root.dataset.primaryCommand = ''
+        return
+      }
+      const text = el.querySelector('.menu__label')?.textContent?.trim()
+      if (text) mainLabel.textContent = text
+
+      const kind = el.getAttribute('data-installer-item')
+      if (kind === 'copy') {
+        root.dataset.primaryKind = 'copy'
+        root.dataset.primaryHref = ''
+        root.dataset.primaryCommand = el.getAttribute('data-command') || ''
+      } else {
+        const href = el.getAttribute('href') || '#download'
+        root.dataset.primaryKind = kind || 'scroll'
+        root.dataset.primaryHref = href
+        root.dataset.primaryCommand = ''
+      }
+    }
+
+    const initial = getSaved() || detectOsDefault()
+    setPrimary(initial)
+
+    const runPrimary = async () => {
+      const kind = root.dataset.primaryKind || 'link'
+      if (kind === 'copy') {
+        const cmd = root.dataset.primaryCommand || ''
+        try {
+          await navigator.clipboard.writeText(cmd)
+          if (toast) {
+            toast.hidden = false
+            toast.textContent = copiedText
+            window.setTimeout(() => {
+              toast.hidden = true
+            }, 1400)
+          }
+        } catch {
+          // ignore
+        }
+        return
+      }
+
+      const href = root.dataset.primaryHref || releasesUrl
+      if (kind === 'link') {
+        window.open(href, '_blank', 'noopener,noreferrer')
+        return
+      }
+    }
+
+    main.addEventListener('click', async (e) => {
+      const clickedCaret = !!e.target?.closest?.('[data-installer-toggle]')
+      if (clickedCaret) {
+        e.preventDefault()
+        if (menu.hidden) openMenu()
+        else closeMenu()
+        return
+      }
+      e.preventDefault()
+      closeMenu()
+      await runPrimary()
+    })
+
+    document.addEventListener('click', (e) => {
+      const t = e.target
+      if (root.contains(t) || menu.contains(t)) return
+      closeMenu()
+    })
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu()
+    })
+
+    window.addEventListener('resize', () => {
+      if (!menu.hidden) positionMenu()
+    })
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!menu.hidden) positionMenu()
+      },
+      true
+    )
+
+    menu.addEventListener('click', async (e) => {
+      const target = e.target?.closest?.('[data-key]')
+      if (!target) return
+      const key = target.getAttribute('data-key')
+      if (key) {
+        try { localStorage.setItem(STORAGE_KEY, key) } catch {}
+        setPrimary(key)
+      }
+
+      const kind = target.getAttribute('data-installer-item')
+      if (kind === 'copy') {
+        e.preventDefault()
+        const cmd = target.getAttribute('data-command') || ''
+        try {
+          await navigator.clipboard.writeText(cmd)
+          if (toast) {
+            toast.hidden = false
+            toast.textContent = copiedText
+            window.setTimeout(() => { toast.hidden = true }, 1400)
+          }
+        } catch {
+          // ignore
+        }
+        closeMenu()
+        return
+      }
+
+      closeMenu()
+    })
+  })()
+</script>
+
+

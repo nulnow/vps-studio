@@ -1,0 +1,117 @@
+---
+---
+
+<script is:inline>
+  function toggleMute() {
+    const video = document.getElementById('reels-video')
+    const btn = document.getElementById('reels-mute-btn')
+    const volumeXIcon = document.getElementById('reels-volume-x-icon')
+    const volumeIcon = document.getElementById('reels-volume-icon')
+    
+    if (video && btn && volumeXIcon && volumeIcon) {
+      video.muted = !video.muted
+      if (video.muted) {
+        volumeXIcon.style.display = 'block'
+        volumeIcon.style.display = 'none'
+        btn.setAttribute('aria-label', 'Unmute video')
+      } else {
+        volumeXIcon.style.display = 'none'
+        volumeIcon.style.display = 'block'
+        btn.setAttribute('aria-label', 'Mute video')
+      }
+    }
+  }
+</script>
+
+<div class="phone" aria-label="iPhone mockup">
+  <div class="phone__bezel">
+    <div class="phone__notch" aria-hidden="true"></div>
+    <div class="phone__screen">
+      
+      <div class="reels" aria-label="Reels UI mock">
+        <div class="reels__video" aria-label="Video placeholder">
+          <div class="reels__video-bg" aria-hidden="true"></div>
+
+          <div class="reels__top">
+            <div class="reels__title">Reels</div>
+          </div>
+
+          <div class="reels__actions" aria-hidden="true">
+            <div class="reels__action">
+              <div class="reels__action-ic">❤</div>
+              <div class="reels__action-txt">12.3k</div>
+            </div>
+            <div class="reels__action">
+              <div class="reels__action-ic">💬</div>
+              <div class="reels__action-txt">420</div>
+            </div>
+            <div class="reels__action">
+              <div class="reels__action-ic">↗</div>
+              <div class="reels__action-txt">Share</div>
+            </div>
+          </div>
+
+          <div class="reels__caption" aria-hidden="true">
+            <div class="reels__user">@vpsstudio</div>
+            <div class="reels__text">Doctor Livesey placeholder — video will be here.</div>
+          </div>
+
+          <div class="reels__bottom" aria-hidden="true">
+            <div class="reels__nav">⌂</div>
+            <div class="reels__nav">🔍</div>
+            <div class="reels__nav reels__nav-add">＋</div>
+            <div class="reels__nav">▶</div>
+            <div class="reels__nav">☺</div>
+          </div>
+
+          <div class="reels__placeholder livesey-gif" aria-label="Video placeholder">
+            <video id="reels-video" class="livesey-gif__video" autoplay loop muted playsinline>
+              <source src="/video.MP4" type="video/mp4" />
+            </video>
+            <button
+              id="reels-mute-btn"
+              class="reels__mute-btn"
+              aria-label="Unmute video"
+              onclick="toggleMute()"
+            >
+              <svg
+                id="reels-volume-x-icon"
+                class="reels__mute-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                <line x1="22" y1="9" x2="16" y2="15" />
+                <line x1="16" y1="9" x2="22" y2="15" />
+              </svg>
+              <svg
+                id="reels-volume-icon"
+                class="reels__mute-icon"
+                style="display: none;"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="phone__home-indicator" onclick="alert('🗿🗿🗿')" aria-hidden="true"></div>
+    </div>
+  </div>
+</div>
+
+

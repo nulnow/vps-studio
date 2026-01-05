@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { hrefFor, t, type Locale } from '../i18n'
+import GitHubIcon from './GitHubIcon.astro'
+
+const { locale } = Astro.props as { locale: Locale }
+
+const title = t(locale, 'footer.license')
+const canonicalPath = locale === 'en' ? '/license/' : `/${locale}/license/`
+
+const githubUrl = 'https://github.com/nulnow/vps-studio'
+const licenseUrl = 'https://github.com/nulnow/vps-studio/blob/main/LICENSE'
+const legalLocale: Locale = locale === 'ru' ? 'ru' : 'en'
+
+const mitText = `MIT License
+
+Copyright (c) 2026 VPS Studio contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.`
+---
+
+<BaseLayout lang={locale} title={title} description={title} canonicalPath={canonicalPath}>
+  <div class="bg">
+    <header class="top">
+      <nav class="nav" aria-label="Primary">
+        <div class="nav__left">
+          <a class="brand" href={hrefFor(locale, '/')}>
+            <span class="brand__dot" aria-hidden="true"></span>
+            <span class="brand__text">VPS Studio</span>
+          </a>
+        </div>
+        <div class="nav__right">
+          <a class="nav__link" href={hrefFor(locale, '/')}>Home</a>
+          <a class="nav__link gh-link" href={githubUrl} target="_blank" rel="noreferrer">
+            <GitHubIcon className="gh-icon" />
+            <span>{t(locale, 'nav.github')}</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container legal">
+        <h1 class="legal__title">{title}</h1>
+        <p class="muted" style="margin-top: 10px;">
+          <a class="nav__link" href={licenseUrl} target="_blank" rel="noreferrer">View on GitHub</a>
+        </p>
+
+        <pre class="legal__pre">{mitText}</pre>
+
+        <div class="legal__links">
+          <a class="nav__link" href={hrefFor(legalLocale, '/license/')}>{t(locale, 'footer.license')}</a>
+          <a class="nav__link" href={hrefFor(legalLocale, '/privacy/')}>{t(locale, 'footer.privacy')}</a>
+          <a class="nav__link" href={hrefFor(legalLocale, '/terms/')}>{t(locale, 'footer.terms')}</a>
+        </div>
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+

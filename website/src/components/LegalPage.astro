@@ -1,0 +1,422 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { hrefFor, t, type Locale } from '../i18n'
+import GitHubIcon from './GitHubIcon.astro'
+
+const { locale, kind } = Astro.props as { locale: Locale; kind: 'privacy' | 'terms' }
+
+const title =
+  kind === 'privacy' ? t(locale, 'legal.privacy.title') : t(locale, 'legal.terms.title')
+
+const canonicalPath =
+  locale === 'en'
+    ? `/${kind}/`
+    : `/${locale}/${kind}/`
+
+const date = new Date().toISOString().slice(0, 10)
+const updatedRu = '2026-01-05'
+const updatedEn = '2026-01-05'
+const githubUrl = 'https://github.com/nulnow/vps-studio'
+const issuesUrl = 'https://github.com/nulnow/vps-studio/issues'
+const licenseUrl = 'https://github.com/nulnow/vps-studio/blob/main/LICENSE'
+const hipUrl = 'https://hip.hosting/?code=0bac6e686d7f1f9f035b'
+
+// Canonical legal pages: RU keeps RU; all other locales link to EN.
+const legalLocale: Locale = locale === 'ru' ? 'ru' : 'en'
+---
+
+<BaseLayout lang={locale} title={title} description={title} canonicalPath={canonicalPath}>
+  <div class="bg">
+    <header class="top">
+      <nav class="nav" aria-label="Primary">
+        <div class="nav__left">
+          <a class="brand" href={hrefFor(locale, '/')}>
+            <span class="brand__dot" aria-hidden="true"></span>
+            <span class="brand__text">VPS Studio</span>
+          </a>
+        </div>
+        <div class="nav__right">
+          <a class="nav__link" href={hrefFor(locale, '/')}>Home</a>
+          <a class="nav__link gh-link" href={githubUrl} target="_blank" rel="noreferrer">
+            <GitHubIcon className="gh-icon" />
+            <span>{t(locale, 'nav.github')}</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container legal">
+        <h1 class="legal__title">{title}</h1>
+        {locale === 'ru' && kind === 'terms' ? (
+          <>
+            <div class="muted legal__meta">
+              <strong>Обновлено:</strong> 2026-01-05 &nbsp; <strong>Версия:</strong> 1.0 (демо-релиз)
+            </div>
+
+            <h2 class="legal__h2">1. О проекте</h2>
+            <p class="muted">
+              VPS Studio — это проект с открытым исходным кодом, находящийся в активной разработке. Всё содержимое сайта
+              и программное обеспечение предоставляется исключительно в <strong>демонстрационных и образовательных целях</strong>.
+            </p>
+            <p class="muted">
+              <strong>GitHub репозиторий:</strong>{' '}
+              <a href={githubUrl} target="_blank" rel="noreferrer">{githubUrl}</a>
+            </p>
+
+            <h2 class="legal__h2">2. Лицензия</h2>
+            <p class="muted">
+              Программное обеспечение распространяется под <strong>лицензией MIT</strong>.
+            </p>
+            <p class="muted"><strong>Вы можете:</strong></p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Свободно использовать, изучать и модифицировать код</li>
+              <li>Распространять копии</li>
+              <li>Использовать в коммерческих проектах (с указанием авторства)</li>
+            </ul>
+            <p class="muted" style="margin-top: 12px;">
+              <strong>Полный текст лицензии:</strong>{' '}
+              <a href={licenseUrl} target="_blank" rel="noreferrer">{licenseUrl}</a>
+            </p>
+
+            <h2 class="legal__h2">3. Ограничение ответственности</h2>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">3.1. Гарантии</h3>
+            <p class="muted" style="font-weight: 900; letter-spacing: 0.02em;">
+              ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ПРЕДОСТАВЛЯЕТСЯ «КАК ЕСТЬ», БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ, ЯВНО ВЫРАЖЕННЫХ ИЛИ
+              ПОДРАЗУМЕВАЕМЫХ.
+            </p>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">3.2. Ответственность</h3>
+            <p class="muted" style="font-weight: 900; letter-spacing: 0.02em;">
+              НИ ПРИ КАКИХ ОБСТОЯТЕЛЬСТВАХ АВТОР ИЛИ ПРАВООБЛАДАТЕЛИ НЕ НЕСУТ ОТВЕТСТВЕННОСТИ ЗА ЛЮБЫЕ ПРЯМЫЕ, КОСВЕННЫЕ,
+              СЛУЧАЙНЫЕ, ОСОБЫЕ ИЛИ ПОСЛЕДСТВУЮЩИЕ УБЫТКИ, ВКЛЮЧАЯ УПУЩЕННУЮ ВЫГОДУ, ПОТЕРЮ ДАННЫХ ИЛИ ПРЕРЫВАНИЕ
+              ДЕЯТЕЛЬНОСТИ.
+            </p>
+
+            <h2 class="legal__h2">4. Запрещённое использование</h2>
+            <p class="muted" style="font-weight: 900;">НЕ ИСПОЛЬЗУЙТЕ VPS STUDIO ДЛЯ:</p>
+
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">4.1. Критически важных систем:</h3>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Финансовых операций</li>
+              <li>Медицинского оборудования</li>
+              <li>Транспортных систем</li>
+              <li>Энергетической инфраструктуры</li>
+              <li>Систем безопасности</li>
+            </ul>
+
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">4.2. Производственных сред:</h3>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Без тщательного тестирования в изолированной среде</li>
+              <li>Без понимания всех рисков</li>
+              <li>Без наличия плана восстановления</li>
+            </ul>
+
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">4.3. Незаконной деятельности:</h3>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Взлома или несанкционированного доступа</li>
+              <li>Распространения вредоносного ПО</li>
+              <li>Нарушения прав интеллектуальной собственности</li>
+            </ul>
+
+            <h2 class="legal__h2">5. Требования к пользователю</h2>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">5.1. Возраст</h3>
+            <p class="muted">
+              Вы подтверждаете, что вам <strong>исполнилось 18 лет</strong> (или возраст совершеннолетия в вашей стране).
+            </p>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">5.2. Технические навыки</h3>
+            <p class="muted">Использование VPS Studio требует:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Понимания принципов работы VPS/серверов</li>
+              <li>Знания SSH, Docker, базового администрирования</li>
+              <li>Способности самостоятельно устранять проблемы</li>
+            </ul>
+
+            <h2 class="legal__h2">6. Контент сайта</h2>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">6.1. Точность информации</h3>
+            <p class="muted">Вся информация на сайте:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Может устареть</li>
+              <li>Может содержать неточности</li>
+              <li>Не является технической документацией</li>
+            </ul>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">6.2. Скриншоты и демо</h3>
+            <p class="muted">Все изображения и примеры:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Могут не отражать текущее состояние проекта</li>
+              <li>Созданы для демонстрации возможностей</li>
+              <li>Не гарантируют работу в вашем случае</li>
+            </ul>
+
+            <h2 class="legal__h2">7. Внешние ссылки</h2>
+            <p class="muted">Сайт может содержать ссылки на:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>GitHub (репозиторий / issues / license)</li>
+              <li>HIP HOSTING</li>
+              <li>Документацию технологий</li>
+            </ul>
+            <p class="muted" style="margin-top: 12px;"><strong>Автор:</strong></p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>не контролирует содержание внешних сайтов</li>
+              <li>не несёт ответственности за их политики</li>
+              <li>рекомендует проверять их условия использования и политики конфиденциальности</li>
+            </ul>
+            <p class="muted" style="margin-top: 12px;">
+              При переходе по ссылкам на GitHub/хостинг действуют их собственные политики.
+            </p>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">7.1. Партнёрские (реферальные) ссылки</h3>
+            <p class="muted">
+              Некоторые ссылки на сайте могут быть партнёрскими/реферальными (например ссылки с промокодами). В этом
+              случае автор может получить вознаграждение, если вы совершите действие по такой ссылке.
+            </p>
+            <p class="muted">
+              Наличие партнёрской ссылки не означает официального партнёрства или одобрения стороннего сервиса.
+              Условия, цены и качество услуг определяются третьей стороной.
+            </p>
+
+            <h2 class="legal__h2">8. Изменения условий</h2>
+            <p class="muted">Автор оставляет за собой право:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Изменять эти условия</li>
+              <li>Прекращать поддержку проекта</li>
+              <li>Изменять лицензию (для будущих версий)</li>
+            </ul>
+            <p class="muted" style="margin-top: 12px;">
+              <strong>Актуальная версия всегда доступна на этой странице.</strong>
+            </p>
+
+            <h2 class="legal__h2">9. Прекращение использования</h2>
+            <p class="muted">Вы можете прекратить использование в любой момент:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Удалив скачанное ПО</li>
+              <li>Перестав посещать сайт</li>
+            </ul>
+            <p class="muted" style="margin-top: 12px;">Автор может ограничить доступ к сайту/проекту, если вы:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Нарушаете эти условия</li>
+              <li>Используете ПО для незаконных целей</li>
+              <li>Создаёте риски для других пользователей</li>
+            </ul>
+
+            <h2 class="legal__h2">10. Разрешение споров</h2>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">10.1. Применимое право</h3>
+            <p class="muted">Настоящие условия регулируются законодательством <strong>Российской Федерации</strong>.</p>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">10.2. Досудебное урегулирование</h3>
+            <p class="muted">Все споры пытаемся решить:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Через issues на GitHub</li>
+              <li>По электронной почте (если предоставите контакт)</li>
+            </ul>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">10.3. Суды</h3>
+            <p class="muted">В случае неудачи — спор передаётся в суд по месту нахождения автора.</p>
+
+            <h2 class="legal__h2">11. Контакты</h2>
+            <p class="muted">
+              <strong>Основной способ связи с автором:</strong>{' '}
+              <a href={issuesUrl} target="_blank" rel="noreferrer">{issuesUrl}</a>
+            </p>
+
+            <hr style="margin: 22px 0; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.12);" />
+
+            <h2 class="legal__h2" style="margin-top: 0;">Важное примечание</h2>
+            <p class="muted">
+              VPS Studio — это <strong>проект разработчика-одиночки</strong>, а не коммерческий продукт. Используйте его с
+              пониманием, что:
+            </p>
+            <ol class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Поддержка ограничена</li>
+              <li>Обновления нерегулярны</li>
+            </ol>
+            <p class="muted" style="margin-top: 12px;">
+              <strong>«Сначала тестируй, потом доверяй» — главное правило.</strong>
+            </p>
+            <p class="muted" style="margin-top: 12px;"><em>Последнее обновление: 2026-01-05</em></p>
+          </>
+        ) : locale === 'ru' && kind === 'privacy' ? (
+          <>
+            <div class="muted legal__meta">
+              <strong>Обновлено:</strong> {updatedRu} &nbsp; <strong>Версия:</strong> 1.0 (демо-релиз)
+            </div>
+
+            <h2 class="legal__h2">1. Сбор данных</h2>
+            <p class="muted">
+              <strong>Автор не собирает и не запрашивает персональные данные пользователей</strong> (нет регистрации, нет
+              форм для email, нет встроенной аналитики).
+            </p>
+
+            <p class="muted"><strong>Локальное хранение в браузере (для удобства):</strong></p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>cookie <code>vpsstudio.lang</code> — выбранный язык (срок: 1 год)</li>
+              <li>localStorage <code>vpsstudio.lang</code> — выбранный язык</li>
+              <li>localStorage <code>vpsstudio.installerChoice.v1</code> — выбранный вариант установки</li>
+            </ul>
+            <p class="muted" style="margin-top: 12px;">
+              Эти значения используются только в вашем браузере.
+            </p>
+
+            <h2 class="legal__h2">2. Технические логи</h2>
+            <p class="muted">
+              Автор не ведёт собственную аналитику/логирование, но провайдер хостинга может автоматически писать технические логи.
+            </p>
+            <p class="muted">
+              Технически при обращении к сайту сервер/провайдер может видеть стандартные HTTP-данные (например IP-адрес,
+              User-Agent и время запроса), необходимые для доставки контента.
+            </p>
+
+            <h2 class="legal__h2">3. Сторонние сервисы и внешние ссылки</h2>
+            <p class="muted">Автор не использует на сайте:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Google Analytics</li>
+              <li>Facebook пиксели</li>
+              <li>Рекламные сети</li>
+              <li>Сервисы аналитики</li>
+            </ul>
+            <p class="muted" style="margin-top: 12px;">
+              На сайте есть внешние ссылки на GitHub (repo/issues/license) и HIP HOSTING (<a href={hipUrl} target="_blank" rel="noreferrer">{hipUrl}</a>).
+              При переходе по ссылкам действуют их политики конфиденциальности и условия использования.
+            </p>
+            <p class="muted">
+              Некоторые ссылки могут быть партнёрскими/реферальными. При переходе по таким ссылкам сторонние сайты могут
+              использовать свои cookies/трекинг в соответствии со своими политиками.
+            </p>
+
+            <h2 class="legal__h2">4. Ваши права</h2>
+            <p class="muted">
+              Поскольку автор не собирает персональные данные, обычно нечего запрашивать, изменять или удалять. Локальные
+              значения можно удалить в настройках браузера (cookies/localStorage).
+            </p>
+
+            <h2 class="legal__h2">5. Контакты</h2>
+            <p class="muted">
+              Если у вас есть вопросы: создайте issue в репозитории GitHub: <a href={issuesUrl} target="_blank" rel="noreferrer">{issuesUrl}</a>
+            </p>
+          </>
+        ) : locale === 'en' && kind === 'terms' ? (
+          <>
+            <div class="muted legal__meta">
+              <strong>Updated:</strong> {updatedEn} &nbsp; <strong>Version:</strong> 1.0 (demo release)
+            </div>
+
+            <h2 class="legal__h2">1. About the project</h2>
+            <p class="muted">
+              VPS Studio is an open-source project under active development. The website content and the software are provided
+              for <strong>demonstration and educational purposes</strong> only.
+            </p>
+            <p class="muted">
+              <strong>GitHub repository:</strong>{' '}
+              <a href={githubUrl} target="_blank" rel="noreferrer">{githubUrl}</a>
+            </p>
+
+            <h2 class="legal__h2">2. License</h2>
+            <p class="muted">
+              The software is distributed under the <strong>MIT License</strong>. Full license text:{' '}
+              <a href={licenseUrl} target="_blank" rel="noreferrer">{licenseUrl}</a>
+            </p>
+
+            <h2 class="legal__h2">3. Disclaimer & limitation of liability</h2>
+            <p class="muted" style="font-weight: 900; letter-spacing: 0.02em;">
+              THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+            </p>
+            <p class="muted" style="font-weight: 900; letter-spacing: 0.02em;">
+              IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.
+            </p>
+
+            <h2 class="legal__h2">4. Prohibited use</h2>
+            <p class="muted" style="font-weight: 900;">DO NOT USE VPS STUDIO FOR:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Safety-critical or mission-critical systems</li>
+              <li>Production environments without thorough testing and a recovery plan</li>
+              <li>Any illegal activity (unauthorized access, malware distribution, IP infringement)</li>
+            </ul>
+
+            <h2 class="legal__h2">5. User requirements</h2>
+            <p class="muted">
+              You confirm that you are <strong>18+</strong> (or the age of majority in your country).
+            </p>
+            <p class="muted">Using VPS Studio typically requires:</p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>Basic understanding of VPS/server administration</li>
+              <li>SSH/Docker basics</li>
+              <li>Ability to troubleshoot issues independently</li>
+            </ul>
+
+            <h2 class="legal__h2">6. External links</h2>
+            <p class="muted">
+              This site contains external links (GitHub repo/issues/license and HIP HOSTING). When you follow them, their own
+              terms and privacy policies apply.
+            </p>
+            <h3 class="legal__h2" style="font-size: 16px; margin-top: 12px;">6.1. Affiliate/referral links</h3>
+            <p class="muted">
+              Some links on this site may be affiliate/referral links (e.g. links with promo codes). In that case, the author
+              may receive compensation if you take an action through such a link.
+            </p>
+            <p class="muted">
+              An affiliate link does not imply official partnership or endorsement. Prices, terms, and service quality are
+              determined by the third party.
+            </p>
+
+            <h2 class="legal__h2">7. Changes</h2>
+            <p class="muted">The author may update these terms at any time. The current version is available on this page.</p>
+
+            <h2 class="legal__h2">8. Contact</h2>
+            <p class="muted">
+              Preferred contact: <a href={issuesUrl} target="_blank" rel="noreferrer">{issuesUrl}</a>
+            </p>
+          </>
+        ) : locale === 'en' && kind === 'privacy' ? (
+          <>
+            <div class="muted legal__meta">
+              <strong>Updated:</strong> {updatedEn} &nbsp; <strong>Version:</strong> 1.0 (demo release)
+            </div>
+
+            <h2 class="legal__h2">1. Data collection</h2>
+            <p class="muted">
+              The author does not collect or request personal user data (no signups, no email forms, no built-in analytics).
+            </p>
+
+            <p class="muted"><strong>Local storage in your browser (for convenience):</strong></p>
+            <ul class="muted" style="margin: 0; padding-left: 18px;">
+              <li>cookie <code>vpsstudio.lang</code> — selected language (1 year)</li>
+              <li>localStorage <code>vpsstudio.lang</code> — selected language</li>
+              <li>localStorage <code>vpsstudio.installerChoice.v1</code> — selected installer option</li>
+            </ul>
+
+            <h2 class="legal__h2">2. Technical logs</h2>
+            <p class="muted">
+              The author does not run their own analytics/logging, but the hosting provider may automatically keep technical logs.
+            </p>
+
+            <h2 class="legal__h2">3. Third-party services & external links</h2>
+            <p class="muted">This site does not use analytics services (Google Analytics, Facebook pixels, ad networks).</p>
+            <p class="muted" style="margin-top: 12px;">
+              The site contains external links (GitHub and HIP HOSTING). When you follow them, their own policies apply.
+            </p>
+            <p class="muted">
+              Some external links may be affiliate/referral links. Third-party sites may use their own cookies/tracking under
+              their policies.
+            </p>
+
+            <h2 class="legal__h2">4. Contact</h2>
+            <p class="muted">
+              Questions: <a href={issuesUrl} target="_blank" rel="noreferrer">{issuesUrl}</a>
+            </p>
+          </>
+        ) : (
+          <>
+            <div class="muted legal__meta">
+              Legal pages are available in English:{' '}
+              <a href="/terms/">Terms of Use</a> · <a href="/privacy/">Privacy Policy</a>
+            </div>
+          </>
+        )}
+
+        <div class="legal__links">
+          <a class="nav__link" href={hrefFor(legalLocale, '/license/')}>{t(locale, 'footer.license')}</a>
+          <a class="nav__link" href={hrefFor(legalLocale, '/privacy/')}>{t(locale, 'footer.privacy')}</a>
+          <a class="nav__link" href={hrefFor(legalLocale, '/terms/')}>{t(locale, 'footer.terms')}</a>
+        </div>
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+

@@ -1,0 +1,88 @@
+---
+import type { Locale } from '../i18n'
+
+const {
+  lang,
+  title = 'VPS Studio',
+  description = 'Manage your VPS like a game.',
+  canonicalPath
+} = Astro.props as {
+  lang: Locale
+  title?: string
+  description?: string
+  canonicalPath?: string
+}
+
+const canonicalUrl = canonicalPath ? new URL(canonicalPath, Astro.site) : undefined
+const htmlLang = lang === 'ru' ? 'ru' : 'en'
+---
+<!doctype html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    {canonicalUrl ? <link rel="canonical" href={canonicalUrl.toString()} /> : null}
+    <script is:inline define:vars={{ pageLang: lang }}>
+      (() => {
+        const KEY = 'vpsstudio.lang'
+        const getCookie = (name) => {
+          const m = document.cookie.match(
+            new RegExp(
+              '(?:^|; )' +
+                name.replace(/[.$?*|{}()[\]\\/+^]/g, '\\$&') +
+                '=([^;]*)'
+            )
+          )
+          return m ? decodeURIComponent(m[1]) : null
+        }
+        const setCookie = (name, value) => {
+          document.cookie =
+            name +
+            '=' +
+            encodeURIComponent(value) +
+            '; Path=/; Max-Age=31536000; SameSite=Lax'
+        }
+
+        const savedRaw = getCookie(KEY) || localStorage.getItem(KEY)
+        const saved =
+          savedRaw === 'ru' ||
+          savedRaw === 'en' ||
+          savedRaw === 'minecraft' ||
+          savedRaw === 'sims' ||
+          savedRaw === 'warhammer'
+            ? savedRaw
+            : null
+
+        // Persist current page language (explicit choice).
+        setCookie(KEY, pageLang)
+        try {
+          localStorage.setItem(KEY, pageLang)
+        } catch {}
+
+        // Auto-redirect only on the very first visit to "/" (when no language was saved yet).
+        if (pageLang === 'en' && location.pathname === '/' && !saved) {
+          const langs = (
+            navigator.languages && navigator.languages.length
+              ? navigator.languages
+              : [navigator.language || '']
+          )
+            .join(',')
+            .toLowerCase()
+          if (langs.includes('ru')) {
+            location.replace('/ru/')
+          }
+        }
+
+        // NOTE: dev banner is now always visible (no hostname gating).
+      })()
+    </script>
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+

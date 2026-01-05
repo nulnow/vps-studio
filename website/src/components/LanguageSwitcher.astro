@@ -1,0 +1,44 @@
+---
+import { hrefFor, localeLabel, locales, type Locale, t } from '../i18n'
+
+const { locale, variant = 'hero' } = Astro.props as {
+  locale: Locale
+  variant?: 'hero' | 'nav'
+}
+---
+
+{
+  variant === 'nav' ? (
+    <div class="lang-nav" aria-label={t(locale, 'lang.title')}>
+      {locales.map((l, idx) => (
+        <>
+          {idx > 0 ? <span class="lang-nav__sep" aria-hidden="true">·</span> : null}
+          <a
+            class={`lang-nav__link ${l === locale ? 'is-active' : ''}`}
+            href={hrefFor(l, '/')}
+            aria-current={l === locale ? 'page' : undefined}
+          >
+            {localeLabel[l]}
+          </a>
+        </>
+      ))}
+    </div>
+  ) : (
+    <div class="lang">
+      <span class="muted lang__label">{t(locale, 'lang.title')}</span>
+      <div class="lang__list" role="list">
+        {locales.map((l) => (
+          <a
+            class={`lang__item ${l === locale ? 'is-active' : ''}`}
+            href={hrefFor(l, '/')}
+            aria-current={l === locale ? 'page' : undefined}
+          >
+            {localeLabel[l]}
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+

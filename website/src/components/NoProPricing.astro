@@ -1,0 +1,42 @@
+---
+import { hrefFor, t, type Locale } from '../i18n'
+
+const { locale } = Astro.props as { locale: Locale }
+---
+
+<div class="no-pro card">
+  <div class="no-pro__head">
+    <div>
+      <div class="no-pro__title">{t(locale, 'noPro.title')}</div>
+      <div class="no-pro__badge">{t(locale, 'noPro.badge')}</div>
+    </div>
+  </div>
+
+  <div class="no-pro__body">
+    <img
+      class="no-pro__avatar no-pro__avatar--gif"
+      src="/pirata.gif"
+      alt="Doctor Livesey"
+      loading="eager"
+      decoding="async"
+    />
+
+    <div class="no-pro__content">
+      <div class="no-pro__says">{t(locale, 'noPro.liveseySays')}</div>
+      <div class="no-pro__laugh"><span>{t(locale, 'noPro.laugh')}</span></div>
+
+      <div class="no-pro__text muted">
+        <p class="no-pro__p">{t(locale, 'noPro.body1')}</p>
+        <p class="no-pro__p">{t(locale, 'noPro.body2')}</p>
+      </div>
+
+      <div class="no-pro__cta">
+        <a class="btn primary" href={hrefFor(locale, '/#download')}>
+          {t(locale, 'noPro.cta')}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+

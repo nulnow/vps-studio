@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import LanguageSwitcher from './LanguageSwitcher.astro'
+import DownloadInstallerButton from './DownloadInstallerButton.astro'
+import NoProPricing from './NoProPricing.astro'
+import GitHubIcon from './GitHubIcon.astro'
+import IPhoneReelsMockup from './IPhoneReelsMockup.astro'
+import { hrefFor, t, type Locale } from '../i18n'
+
+const { locale } = Astro.props as { locale: Locale }
+
+const sponsorUrl = 'https://hip.hosting/?code=0bac6e686d7f1f9f035b'
+const githubUrl = 'https://github.com/nulnow/vps-studio'
+const issuesUrl = 'https://github.com/nulnow/vps-studio/issues'
+const legalLocale = locale === 'ru' ? 'ru' : 'en'
+
+const heroTitle = t(locale, 'hero.title')
+const heroTitleParts = heroTitle.trim().split(/\s+/)
+const heroTitleFirst = heroTitleParts[0] || heroTitle
+const heroTitleRest = heroTitleParts.slice(1).join(' ')
+---
+
+<BaseLayout
+  lang={locale}
+  title={t(locale, 'meta.title')}
+  description={t(locale, 'meta.description')}
+  canonicalPath={locale === 'en' ? '/' : `/${locale}/`}
+>
+  <div class="bg">
+    <header class="top">
+      <div class="dev-banner" role="note" aria-label="Site notice">
+        <div class="dev-banner__line dev-banner__line1">
+          {t(locale, 'dev.banner')}
+        </div>
+        <div class="dev-banner__line dev-banner__line2">
+          <span class="dev-banner__hint">{t(locale, 'dev.banner.feedback')}</span>{' '}
+          <a class="dev-banner__link" href={issuesUrl} target="_blank" rel="noreferrer">
+            <GitHubIcon className="gh-icon" />
+            <span>{t(locale, 'dev.banner.issues')}</span>
+          </a>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <div class="nav__left">
+          <a class="brand" href={hrefFor(locale, '/')}>
+            <span class="brand__dot" aria-hidden="true"></span>
+            <span class="brand__text">VPS Studio</span>
+          </a>
+          <LanguageSwitcher locale={locale} variant="nav" />
+        </div>
+
+        <div class="nav__right">
+          <div class="nav__links">
+            <a class="nav__link nav__pricing-link" href={hrefFor(locale, '/#pricing')}>
+              <span class="nav__pricing-title">{t(locale, 'nav.pricing')}</span>
+              <span class="nav__pricing-note">{t(locale, 'nav.pricing.note')}</span>
+            </a>
+            <a class="nav__link" href={hrefFor(locale, '/#sponsor')}>{t(locale, 'nav.sponsor')}</a>
+            <a class="nav__link gh-link" href={githubUrl} target="_blank" rel="noreferrer">
+              <GitHubIcon className="gh-icon" />
+              <span>{t(locale, 'nav.github')}</span>
+            </a>
+          </div>
+
+          <details class="nav__mobile">
+            <summary class="nav__mobile-btn">{t(locale, 'nav.mobile.menu')}</summary>
+            <div class="nav__mobile-panel" role="menu">
+              <a class="nav__mobile-link" href={hrefFor(locale, '/#pricing')} role="menuitem">
+                <span class="nav__mobile-title">{t(locale, 'nav.pricing')}</span>
+                <span class="nav__mobile-note">{t(locale, 'nav.pricing.note')}</span>
+              </a>
+              <a class="nav__mobile-link" href={hrefFor(locale, '/#sponsor')} role="menuitem">
+                {t(locale, 'nav.sponsor')}
+              </a>
+              <a class="nav__mobile-link" href={githubUrl} target="_blank" rel="noreferrer" role="menuitem">
+                <span class="gh-link">
+                  <GitHubIcon className="gh-icon" />
+                  <span>{t(locale, 'nav.github')}</span>
+                </span>
+              </a>
+            </div>
+          </details>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container-wide">
+          <div class="card hero__card">
+          <div class="hero__fx" aria-hidden="true"></div>
+          <div class="hero__grid">
+            <div class="hero__left">
+              <div class="hero__badge muted">
+                <span>
+                  {t(locale, 'hero.badge')}{' '}
+                  {t(locale, 'hero.badge.accent') ? (
+                    <span class="accent">{t(locale, 'hero.badge.accent')}</span>
+                  ) : null}
+                </span>
+                {t(locale, 'hero.badge.noAi') ? (
+                  <span class="hero__badge-pill">{t(locale, 'hero.badge.noAi')} {"🎉"}</span>
+                ) : null}
+              </div>
+              <h1 class="hero__title">
+                <span class="hero__title-rainbow">{heroTitleFirst}</span>
+                {heroTitleRest ? <span> {heroTitleRest}</span> : null}
+              </h1>
+              <p class="hero__subtitle muted">{t(locale, 'hero.subtitle')}</p>
+
+              <div class="hero__cta">
+                <DownloadInstallerButton locale={locale} />
+                <a class="btn" href={hrefFor(locale, '/#pricing')}>
+                  {t(locale, 'nav.pricing')}
+                </a>
+              </div>
+            </div>
+
+            <div class="hero__right" aria-label="Preview">
+              <IPhoneReelsMockup />
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <div class="container">
+      <section id="pricing" class="section">
+        <NoProPricing locale={locale} />
+      </section>
+
+      <section id="sponsor" class="section">
+        <div class="card sponsor">
+          <div>
+            <div style="font-weight: 900;">{t(locale, 'sponsor.title')}</div>
+            <p class="muted" style="margin: 8px 0 0;">{t(locale, 'sponsor.body')}</p>
+          </div>
+          <a class="btn primary" href={sponsorUrl} target="_blank" rel="noreferrer">
+            {t(locale, 'sponsor.cta')}
+          </a>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer__row muted">
+          {t(locale, 'footer.rights', { year: String(new Date().getFullYear()) })}
+        </div>
+        <div class="footer__row footer__links">
+          <a class="footer__link" href={hrefFor(legalLocale, '/license/')}>{t(locale, 'footer.license')}</a>
+          <a class="footer__link" href={hrefFor(legalLocale, '/privacy/')}>{t(locale, 'footer.privacy')}</a>
+          <a class="footer__link" href={hrefFor(legalLocale, '/terms/')}>{t(locale, 'footer.terms')}</a>
+          <a class="footer__link" href={githubUrl} target="_blank" rel="noreferrer">
+            <span class="gh-link">
+              <GitHubIcon className="gh-icon" />
+              <span>{t(locale, 'footer.github')}</span>
+            </span>
+          </a>
+        </div>
+      </footer>
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+

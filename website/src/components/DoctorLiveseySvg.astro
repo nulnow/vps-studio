@@ -1,0 +1,89 @@
+---
+const { className } = Astro.props as { className?: string }
+---
+
+<svg
+  class={className}
+  viewBox="0 0 512 512"
+  role="img"
+  aria-label="Doctor Livesey"
+>
+  <defs>
+    <radialGradient id="face" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffd9b3" />
+      <stop offset="55%" stop-color="#f6b98a" />
+      <stop offset="100%" stop-color="#d88a5a" />
+    </radialGradient>
+    <linearGradient id="coat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8f0ff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#9fb7ff" stop-opacity="0.25" />
+    </linearGradient>
+    <linearGradient id="shadow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000" stop-opacity="0.55" />
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <circle cx="256" cy="256" r="220" fill="url(#shadow)" opacity="0.25" />
+
+  <!-- coat -->
+  <path
+    d="M120 430c10-70 60-120 136-120h0c76 0 126 50 136 120"
+    fill="url(#coat)"
+    stroke="#ffffff"
+    stroke-opacity="0.25"
+    stroke-width="6"
+  />
+
+  <!-- neck -->
+  <path d="M220 320c10 22 26 34 36 34s26-12 36-34v-30h-72v30z" fill="#f2b283" />
+
+  <!-- head -->
+  <ellipse cx="256" cy="230" rx="120" ry="135" fill="url(#face)" />
+
+  <!-- hair -->
+  <path
+    d="M154 212c8-78 56-136 132-136s124 58 132 136c-18-20-52-38-80-44-8 22-34 40-52 40s-44-18-52-40c-28 6-62 24-80 44z"
+    fill="#2a2f3a"
+  />
+
+  <!-- eyes -->
+  <ellipse cx="214" cy="235" rx="16" ry="12" fill="#1b1f29" />
+  <ellipse cx="298" cy="235" rx="16" ry="12" fill="#1b1f29" />
+  <circle cx="208" cy="232" r="4" fill="#fff" opacity="0.9" />
+  <circle cx="292" cy="232" r="4" fill="#fff" opacity="0.9" />
+
+  <!-- eyebrows -->
+  <path d="M188 210c18-16 40-18 56-8" stroke="#1b1f29" stroke-width="10" stroke-linecap="round" />
+  <path d="M324 210c-18-16-40-18-56-8" stroke="#1b1f29" stroke-width="10" stroke-linecap="round" />
+
+  <!-- mustache -->
+  <path
+    d="M206 282c16-10 34-14 50-14s34 4 50 14c-10 18-26 28-50 28s-40-10-50-28z"
+    fill="#3a2f28"
+    opacity="0.9"
+  />
+
+  <!-- laugh mouth -->
+  <path
+    d="M190 300c18 40 52 64 66 64s48-24 66-64c-22 10-44 16-66 16s-44-6-66-16z"
+    fill="#7a0f1d"
+  />
+  <path d="M210 330c16 12 30 18 46 18s30-6 46-18" stroke="#ffd2d2" stroke-width="10" stroke-linecap="round" />
+
+  <!-- stethoscope -->
+  <path
+    d="M200 355c0 40 20 70 56 70s56-30 56-70"
+    fill="none"
+    stroke="#cfe3ff"
+    stroke-width="12"
+    stroke-linecap="round"
+  />
+  <circle cx="196" cy="352" r="14" fill="#cfe3ff" />
+  <circle cx="316" cy="352" r="14" fill="#cfe3ff" />
+  <circle cx="256" cy="430" r="18" fill="#cfe3ff" opacity="0.95" />
+  <circle cx="256" cy="430" r="8" fill="#2a2f3a" opacity="0.8" />
+</svg>
+
+
