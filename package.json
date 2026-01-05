@@ -1,11 +1,13 @@
 {
   "name": "vps-studio",
-  "private": true,
   "version": "0.1.0",
   "description": "Electron + React + TypeScript + Tailwind starter",
   "license": "MIT",
   "type": "module",
   "main": "dist-electron/main.cjs",
+  "bin": {
+    "vps-studio": "./cli.js"
+  },
   "scripts": {
     "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:electron\"",
     "dev:renderer": "vite --port 5173",
